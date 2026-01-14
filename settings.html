@@ -3,53 +3,206 @@
 <head>
   <title>Settings - SwitchEnv</title>
   <style>
-    body { font-family: Arial, sans-serif; }
+    body { 
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 { color: #36395A; }
+    h2 { 
+      color: #36395A; 
+      margin-top: 30px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #11CCCA;
+    }
     .env-input { 
       margin: 5px; 
-      padding: 5px; 
+      padding: 8px; 
       width: calc(30% - 22px); 
-      border-radius: 10px; /* Rounded corners */
-      border: 1px solid #ccc; /* Slim border */
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    .color-input {
+      margin: 5px;
+      padding: 2px;
+      width: 50px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      vertical-align: middle;
     }
     .env-button { 
       margin: 5px; 
       padding: 10px; 
-      border-radius: 10px; /* Rounded corners */
-      border: 1px solid #ccc; /* Slim border */
-      cursor: pointer; /* Pointer cursor on hover */
-      transition: background-color 0.3s, color 0.3s; /* Smooth transition */	  
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
     }
     .env-button:hover {
-		filter: brightness(95%); /* Darker color on hover */
+      filter: brightness(95%);
     }
     #save-env {
-      background-color: #11CCCA; /* Save button color */
+      background-color: #11CCCA;
       color: white;
     }
     #delete-env {
-      background-color: #FF6C6C; /* Clear Environments button color */
+      background-color: #FF6C6C;
       color: white;
     }
     .env-list {
-		margin-top: 20px;
-		margin-bottom: 10px;
+      margin-top: 20px;
+      margin-bottom: 10px;
     }
     .env-item {
-      padding: 5px;
+      padding: 10px;
       border-bottom: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .env-item button{
-		font-size: 12px;
-		padding: 6px; 
+    .env-item .env-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 3px rgba(0,0,0,0.3);
+      flex-shrink: 0;
+    }
+    .env-item .env-info {
+      flex-grow: 1;
+    }
+    .env-item button {
+      font-size: 12px;
+      padding: 6px; 
+    }
+
+    /* Marker Settings Section */
+    .settings-section {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+    .setting-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      gap: 15px;
+    }
+    .setting-row:last-child {
+      margin-bottom: 0;
+    }
+    .setting-label {
+      min-width: 120px;
+      font-weight: 500;
+      color: #36395A;
+    }
+    .setting-control select {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      min-width: 150px;
+    }
+    .toggle-switch {
+      position: relative;
+      width: 50px;
+      height: 26px;
+    }
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.3s;
+      border-radius: 26px;
+    }
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+    .toggle-switch input:checked + .toggle-slider {
+      background-color: #11CCCA;
+    }
+    .toggle-switch input:checked + .toggle-slider:before {
+      transform: translateX(24px);
+    }
+
+    /* Add env form */
+    .add-env-form {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 5px;
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
-  <h1>Environments</h1>
+  <h1>SwitchEnv Settings</h1>
+
+  <!-- Marker Settings Section -->
+  <h2>Page Marker</h2>
+  <div class="settings-section">
+    <div class="setting-row">
+      <span class="setting-label">Show Marker</span>
+      <div class="setting-control">
+        <label class="toggle-switch">
+          <input type="checkbox" id="marker-enabled">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+    <div class="setting-row">
+      <span class="setting-label">Shape</span>
+      <div class="setting-control">
+        <select id="marker-shape">
+          <option value="ribbon">Ribbon</option>
+          <option value="badge">Badge</option>
+          <option value="triangle">Triangle</option>
+        </select>
+      </div>
+    </div>
+    <div class="setting-row">
+      <span class="setting-label">Position</span>
+      <div class="setting-control">
+        <select id="marker-position">
+          <option value="top-right">Top Right</option>
+          <option value="top-left">Top Left</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Environments Section -->
+  <h2>Environments</h2>
   <div class="env-list" id="env-list"></div>
-  <input type="text" id="new-env-name" class="env-input" placeholder="Environment name">
-  <input type="text" id="new-env-subdomain" class="env-input" placeholder="Environment subdomain">
-  <button id="save-env" class="env-button">Add</button>
+  
+  <div class="add-env-form">
+    <input type="text" id="new-env-name" class="env-input" placeholder="Environment name">
+    <input type="text" id="new-env-subdomain" class="env-input" placeholder="Subdomain">
+    <input type="color" id="new-env-color" class="color-input" value="#11CCCA" title="Marker color">
+    <button id="save-env" class="env-button">Add</button>
+  </div>
+
   <script type="module" src="settings.js"></script>
 </body>
 </html>

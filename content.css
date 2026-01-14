@@ -1,0 +1,148 @@
+/* SwitchEnv Environment Marker Styles */
+
+/* Base marker container */
+.switchenv-marker {
+  position: fixed;
+  z-index: 2147483647;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ==================== RIBBON STYLE ==================== */
+.switchenv-marker.ribbon {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+}
+
+.switchenv-marker.ribbon.top-left {
+  top: 0;
+  left: 0;
+}
+
+.switchenv-marker.ribbon.top-right {
+  top: 0;
+  right: 0;
+}
+
+.switchenv-marker.ribbon .marker-content {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  padding: 8px 0;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.switchenv-marker.ribbon.top-left .marker-content {
+  top: 28px;
+  left: -50px;
+  transform: rotate(-45deg);
+}
+
+.switchenv-marker.ribbon.top-right .marker-content {
+  top: 28px;
+  right: -50px;
+  transform: rotate(45deg);
+}
+
+/* ==================== BADGE STYLE ==================== */
+.switchenv-marker.badge {
+  padding: 0;
+}
+
+.switchenv-marker.badge.top-left {
+  top: 12px;
+  left: 12px;
+}
+
+.switchenv-marker.badge.top-right {
+  top: 12px;
+  right: 12px;
+}
+
+.switchenv-marker.badge .marker-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== TRIANGLE STYLE ==================== */
+.switchenv-marker.triangle {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.switchenv-marker.triangle.top-left {
+  top: 0;
+  left: 0;
+}
+
+.switchenv-marker.triangle.top-right {
+  top: 0;
+  right: 0;
+}
+
+.switchenv-marker.triangle .marker-background {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.switchenv-marker.triangle.top-left .marker-background {
+  top: 0;
+  left: 0;
+  border-top: 100px solid currentColor;
+  border-right: 100px solid transparent;
+}
+
+.switchenv-marker.triangle.top-right .marker-background {
+  top: 0;
+  right: 0;
+  border-top: 100px solid currentColor;
+  border-left: 100px solid transparent;
+}
+
+.switchenv-marker.triangle .marker-content {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+}
+
+.switchenv-marker.triangle.top-left .marker-content {
+  top: 22px;
+  left: 8px;
+  transform: rotate(-45deg);
+  transform-origin: center center;
+}
+
+.switchenv-marker.triangle.top-right .marker-content {
+  top: 22px;
+  right: 8px;
+  transform: rotate(45deg);
+  transform-origin: center center;
+}

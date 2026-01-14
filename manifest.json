@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "SwitchEnv",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Switch between different DEV environments",
   "permissions": ["storage", "activeTab", "scripting"],
   "action": {
@@ -20,5 +20,13 @@
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_end"
+    }
+  ]
 }
