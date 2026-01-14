@@ -3,7 +3,7 @@
 A Chrome extension for developers to quickly switch between different environments (dev, staging, production, etc.) by changing URL subdomains, with optional visual markers to identify the current environment.
 
 <p align="center">
-  <img src="example_popup_window.png" alt="SwitchEnv popup window" width="280">
+  <img src="example_popup_window.png" alt="SwitchEnv popup window" width="500">
 </p>
 
 ## Features
