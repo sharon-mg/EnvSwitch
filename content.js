@@ -105,6 +105,29 @@
     }
   }
 
+  // Track mouse position for hover effect (since pointer-events: none)
+  let mouseTrackingEnabled = false;
+  
+  function setupMouseTracking(marker, hoverOpacity) {
+    if (mouseTrackingEnabled) return;
+    mouseTrackingEnabled = true;
+    
+    document.addEventListener('mousemove', function(e) {
+      const currentMarker = document.getElementById(MARKER_ID);
+      if (!currentMarker) return;
+      
+      const rect = currentMarker.getBoundingClientRect();
+      const isOverMarker = (
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom
+      );
+      
+      currentMarker.classList.toggle('faded', isOverMarker);
+    });
+  }
+
   // Inject marker into the page
   function injectMarker(env, settings) {
     removeExistingMarker();
@@ -116,6 +139,9 @@
     marker.style.setProperty('--hover-opacity', hoverOpacity);
     
     document.body.appendChild(marker);
+    
+    // Setup mouse tracking for hover effect
+    setupMouseTracking(marker, hoverOpacity);
   }
 
   // Main initialization
