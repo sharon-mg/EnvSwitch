@@ -79,7 +79,3 @@ https://staging.example.com/dashboard
 - `storage` - Save your environment configurations
 - `activeTab` - Access the current tab's URL
 - `scripting` - Inject the visual marker into pages
-
-## License
-
-MIT
