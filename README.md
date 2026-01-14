@@ -1,4 +1,4 @@
-# SwitchEnv
+# <img src="icons/icon48.png" width="32" height="32" alt="SwitchEnv icon"> SwitchEnv
 
 A Chrome extension for developers to quickly switch between different environments (dev, staging, production, etc.) by changing URL subdomains, with optional visual markers to identify the current environment.
 
