@@ -110,6 +110,11 @@
     removeExistingMarker();
     
     const marker = createMarker(env, settings);
+    
+    // Set hover opacity from settings (default 20%)
+    const hoverOpacity = (settings.hoverOpacity ?? 20) / 100;
+    marker.style.setProperty('--hover-opacity', hoverOpacity);
+    
     document.body.appendChild(marker);
   }
 

@@ -12,21 +12,40 @@ function loadMarkerSettings() {
 		const settings = result.markerSettings || {
 			enabled: false,
 			shape: 'ribbon',
-			position: 'top-right'
+			position: 'top-right',
+			hoverOpacity: 20
 		};
 		
 		document.getElementById('marker-enabled').checked = settings.enabled;
 		document.getElementById('marker-shape').value = settings.shape;
 		document.getElementById('marker-position').value = settings.position;
+		document.getElementById('marker-hover-opacity').value = settings.hoverOpacity ?? 20;
+		
+		updateToggleStatus(settings.enabled);
+		updateOpacityDisplay(settings.hoverOpacity ?? 20);
 	});
 }
 
+function updateToggleStatus(enabled) {
+	const statusEl = document.getElementById('toggle-status');
+	statusEl.textContent = enabled ? 'ON' : 'OFF';
+	statusEl.classList.toggle('active', enabled);
+}
+
+function updateOpacityDisplay(value) {
+	document.getElementById('opacity-value').textContent = value + '%';
+}
+
 function saveMarkerSettings() {
+	const enabled = document.getElementById('marker-enabled').checked;
 	const settings = {
-		enabled: document.getElementById('marker-enabled').checked,
+		enabled: enabled,
 		shape: document.getElementById('marker-shape').value,
-		position: document.getElementById('marker-position').value
+		position: document.getElementById('marker-position').value,
+		hoverOpacity: parseInt(document.getElementById('marker-hover-opacity').value, 10)
 	};
+	
+	updateToggleStatus(enabled);
 	
 	chrome.storage.sync.set({ markerSettings: settings }, function() {
 		console.log('Marker settings saved:', settings);
@@ -37,6 +56,10 @@ function saveMarkerSettings() {
 document.getElementById('marker-enabled').addEventListener('change', saveMarkerSettings);
 document.getElementById('marker-shape').addEventListener('change', saveMarkerSettings);
 document.getElementById('marker-position').addEventListener('change', saveMarkerSettings);
+document.getElementById('marker-hover-opacity').addEventListener('input', function() {
+	updateOpacityDisplay(this.value);
+});
+document.getElementById('marker-hover-opacity').addEventListener('change', saveMarkerSettings);
 
 // ==================== ENVIRONMENTS ====================
 

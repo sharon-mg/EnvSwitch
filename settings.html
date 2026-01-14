@@ -109,8 +109,8 @@
     }
     .toggle-switch {
       position: relative;
-      width: 50px;
-      height: 26px;
+      width: 60px;
+      height: 32px;
     }
     .toggle-switch input {
       opacity: 0;
@@ -124,26 +124,86 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: #ccc;
-      transition: 0.3s;
-      border-radius: 26px;
+      background: linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 32px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05);
     }
     .toggle-slider:before {
       position: absolute;
       content: "";
-      height: 20px;
-      width: 20px;
+      height: 26px;
+      width: 26px;
       left: 3px;
       bottom: 3px;
-      background-color: white;
-      transition: 0.3s;
+      background: linear-gradient(135deg, #fff 0%, #f3f4f6 100%);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
     }
     .toggle-switch input:checked + .toggle-slider {
-      background-color: #11CCCA;
+      background: linear-gradient(135deg, #11CCCA 0%, #0ea5a3 100%);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 12px rgba(17, 204, 202, 0.4);
     }
     .toggle-switch input:checked + .toggle-slider:before {
-      transform: translateX(24px);
+      transform: translateX(28px);
+    }
+    .toggle-switch:hover .toggle-slider {
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+    .toggle-switch input:checked + .toggle-slider:hover {
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 16px rgba(17, 204, 202, 0.5);
+    }
+    .toggle-status {
+      margin-left: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #9ca3af;
+      transition: color 0.3s;
+    }
+    .toggle-status.active {
+      color: #11CCCA;
+    }
+
+    /* Opacity slider */
+    .opacity-slider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .opacity-slider input[type="range"] {
+      -webkit-appearance: none;
+      width: 150px;
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #e5e7eb 0%, #11CCCA 100%);
+      outline: none;
+      cursor: pointer;
+    }
+    .opacity-slider input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff 0%, #f3f4f6 100%);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .opacity-slider input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+    }
+    .opacity-value {
+      min-width: 45px;
+      padding: 4px 8px;
+      background: #f3f4f6;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #36395A;
+      text-align: center;
     }
 
     /* Add env form */
@@ -164,11 +224,21 @@
   <div class="settings-section">
     <div class="setting-row">
       <span class="setting-label">Show Marker</span>
-      <div class="setting-control">
+      <div class="setting-control" style="display: flex; align-items: center;">
         <label class="toggle-switch">
           <input type="checkbox" id="marker-enabled">
           <span class="toggle-slider"></span>
         </label>
+        <span class="toggle-status" id="toggle-status">OFF</span>
+      </div>
+    </div>
+    <div class="setting-row">
+      <span class="setting-label">Hover Opacity</span>
+      <div class="setting-control">
+        <div class="opacity-slider">
+          <input type="range" id="marker-hover-opacity" min="0" max="100" value="20">
+          <span class="opacity-value" id="opacity-value">20%</span>
+        </div>
       </div>
     </div>
     <div class="setting-row">
