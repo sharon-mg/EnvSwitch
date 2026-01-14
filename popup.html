@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SwitchEnv</title>
+  <style>
+    body { 
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      /* 
+      */
+      /* display: flex;
+      flex-direction: column; */ 
+      align-items: center;
+      text-align: center;
+    }
+    .bold { font-weight: bold; }
+    h1 span {
+      -webkit-user-select: none; /* Safari */        
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* IE10+/Edge */
+      user-select: none; /* Standard */
+      display: block;
+      font-style: oblique;
+      font-weight: 900;
+      /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+    }
+    h1 span.red { color: #FF6C6C; }
+    h1 span.cyan { color: #11CCCA; }
+    #env-popup { 
+      width: 240px; 
+      display: flexbox;
+      justify-content: center;
+      align-items: center;
+    }
+    .env-button { 
+      margin: 5px; 
+      padding: 10px; 
+      width: 150px; /* Set a fixed width for all buttons */
+      font-weight: 520;
+      font-size: 16px;
+      text-align: center; /* Center the text inside the button */
+      border-radius: 10px; /* Rounded corners */
+      border: 1px solid #ccc; /* Slim border */
+      cursor: pointer; /* Pointer cursor on hover */
+      transition: background-color 0.3s, color 0.3s; /* Smooth transition */	  
+    }
+    .env-button:hover {
+		filter: brightness(95%); /* Darker color on hover */
+    }
+    #env-buttons{
+      width: 100%; /* Ensure the container div is centered */
+      display: flexbox;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 5px;
+    }
+    .button-wrapper{
+      width: 76%; /* Ensure the container div is centered */
+      margin-left: 12%;
+      margin-right: 12%;
+
+      margin-bottom: 10px;
+      display: flexbox;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    } 
+    .button-29 {
+      width: 100%; 
+      align-items: center;
+      appearance: none;
+      /* background-image: radial-gradient(100% 100% at 100% 0, #b8c99e 0, #cacac3 100%); */
+      background-image: radial-gradient(100% 100% at 100% 0, #c7d6aa 0, #cacab9 100%);
+      border: 0;
+      border-radius: 6px;
+      box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
+      box-sizing: border-box;
+      color: #fff;
+      cursor: pointer;
+      display: inline-flex;
+      font-family: "JetBrains Mono", monospace;
+      height: 48px;
+      justify-content: center;
+      line-height: 1;
+      list-style: none;
+      overflow: hidden;
+      padding-left: 16px;
+      padding-right: 16px;
+      position: relative;
+      text-align: left;
+      text-decoration: none;
+      transition: box-shadow .15s, transform .15s;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      white-space: nowrap;
+      will-change: box-shadow, transform;
+      font-size: 18px;
+    }
+    .button-29:hover {
+      box-shadow:
+      rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px,
+      #807259 0 -3px 0 inset;
+      transform: translateY(-2px);
+    }
+  .button-30 {
+    width: 100%; 
+    align-items: center;
+    appearance: none;
+    background-color: #FCFCFD;
+    border-radius: 4px;
+    border-width: 0;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #36395A;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono",monospace;
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s,transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow,transform;
+    font-size: 18px;
+  }
+
+  .button-30:focus {
+    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  }
+
+  .button-30:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
+  }
+
+  .button-30:active {
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(2px);
+  }
+  </style>
+</head>
+
+<body>
+  <div id="env-popup">
+    <div class="logo">
+      <h1>
+        <span class="cyan">Switch</span>
+        <span class="red">Environment</span>
+      </h1>
+    </div class="logo">
+    <div id="env-buttons"></div>
+    <script type="module" src="popup.js"></script>
+  </div>
+</body>
+</html>

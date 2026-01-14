@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Settings - SwitchEnv</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .env-input { 
+      margin: 5px; 
+      padding: 5px; 
+      width: calc(30% - 22px); 
+      border-radius: 10px; /* Rounded corners */
+      border: 1px solid #ccc; /* Slim border */
+    }
+    .env-button { 
+      margin: 5px; 
+      padding: 10px; 
+      border-radius: 10px; /* Rounded corners */
+      border: 1px solid #ccc; /* Slim border */
+      cursor: pointer; /* Pointer cursor on hover */
+      transition: background-color 0.3s, color 0.3s; /* Smooth transition */	  
+    }
+    .env-button:hover {
+		filter: brightness(95%); /* Darker color on hover */
+    }
+    #save-env {
+      background-color: #11CCCA; /* Save button color */
+      color: white;
+    }
+    #delete-env {
+      background-color: #FF6C6C; /* Clear Environments button color */
+      color: white;
+    }
+    .env-list {
+		margin-top: 20px;
+		margin-bottom: 10px;
+    }
+    .env-item {
+      padding: 5px;
+      border-bottom: 1px solid #ccc;
+    }
+    .env-item button{
+		font-size: 12px;
+		padding: 6px; 
+    }
+  </style>
+</head>
+<body>
+  <h1>Environments</h1>
+  <div class="env-list" id="env-list"></div>
+  <input type="text" id="new-env-name" class="env-input" placeholder="Environment name">
+  <input type="text" id="new-env-subdomain" class="env-input" placeholder="Environment subdomain">
+  <button id="save-env" class="env-button">Add</button>
+  <script type="module" src="settings.js"></script>
+</body>
+</html>
