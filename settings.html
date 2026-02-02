@@ -16,12 +16,39 @@
       padding-bottom: 10px;
       border-bottom: 2px solid #11CCCA;
     }
+    h3 {
+      color: #36395A;
+      margin-top: 25px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
     .env-input { 
-      margin: 5px; 
-      padding: 8px; 
-      width: calc(30% - 22px); 
-      border-radius: 10px;
+      padding: 8px 12px; 
+      width: 100%;
+      border-radius: 8px;
       border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    .env-input.regex-input {
+      font-family: monospace;
+    }
+    .env-input.invalid {
+      border-color: #FF6C6C;
+      background-color: #fff0f0;
+    }
+    .regex-error {
+      color: #FF6C6C;
+      font-size: 12px;
+      width: 100%;
+      margin-top: 5px;
+      display: none;
+    }
+    .field-hint {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+      display: block;
     }
     .color-input {
       margin: 5px;
@@ -73,6 +100,29 @@
     }
     .env-item .env-info {
       flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .env-item .env-name-subdomain {
+      font-weight: 500;
+    }
+    .env-item .env-regex {
+      font-size: 12px;
+      color: #666;
+      font-family: monospace;
+    }
+    .env-item .env-regex-input {
+      font-size: 12px;
+      font-family: monospace;
+      padding: 4px 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 150px;
+    }
+    .env-item .env-regex-input.invalid {
+      border-color: #FF6C6C;
+      background-color: #fff0f0;
     }
     .env-item button {
       font-size: 12px;
@@ -209,10 +259,29 @@
     /* Add env form */
     .add-env-form {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .form-row {
+      display: flex;
       align-items: center;
-      gap: 5px;
-      margin-top: 15px;
+      gap: 15px;
+    }
+    .form-row .setting-label {
+      min-width: 100px;
+    }
+    .form-row .field-group {
+      flex: 1;
+    }
+    .form-row.color-row {
+      align-items: center;
+    }
+    .form-row.color-row .color-input {
+      margin: 0;
+    }
+    .form-row.button-row {
+      margin-top: 5px;
+      justify-content: flex-end;
     }
   </style>
 </head>
@@ -266,11 +335,39 @@
   <h2>Environments</h2>
   <div class="env-list" id="env-list"></div>
   
-  <div class="add-env-form">
-    <input type="text" id="new-env-name" class="env-input" placeholder="Environment name">
-    <input type="text" id="new-env-subdomain" class="env-input" placeholder="Subdomain">
-    <input type="color" id="new-env-color" class="color-input" value="#11CCCA" title="Marker color">
-    <button id="save-env" class="env-button">Add</button>
+  <h3>Add New Environment</h3>
+  <div class="settings-section">
+    <div class="add-env-form">
+      <div class="form-row">
+        <span class="setting-label">Name</span>
+        <div class="field-group">
+          <input type="text" id="new-env-name" class="env-input" placeholder="e.g., Development">
+        </div>
+      </div>
+      <div class="form-row">
+        <span class="setting-label">Subdomain</span>
+        <div class="field-group">
+          <input type="text" id="new-env-subdomain" class="env-input" placeholder="e.g., dev">
+        </div>
+      </div>
+      <div class="form-row">
+        <span class="setting-label">Pattern</span>
+        <div class="field-group">
+          <input type="text" id="new-env-regex" class="env-input regex-input" placeholder="e.g., dev\.example\.com">
+          <span class="field-hint">Regex to match hostname (defaults to subdomain)</span>
+          <span id="regex-error" class="regex-error">Invalid regex pattern</span>
+        </div>
+      </div>
+      <div class="form-row color-row">
+        <span class="setting-label">Color</span>
+        <div class="field-group">
+          <input type="color" id="new-env-color" class="color-input" value="#11CCCA" title="Marker color">
+        </div>
+      </div>
+      <div class="form-row button-row">
+        <button id="save-env" class="env-button">Add Environment</button>
+      </div>
+    </div>
   </div>
 
   <script type="module" src="settings.js"></script>

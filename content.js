@@ -6,29 +6,26 @@
   const DEFAULT_COLOR = '#11CCCA';
   const MARKER_ID = 'switchenv-marker';
 
-  // Get current page's subdomain
-  function getSubdomain() {
-    const hostname = window.location.hostname;
-    const parts = hostname.split('.');
-    
-    if (parts.length > 2) {
-      return parts[0];
-    } else if (parts.length === 2) {
-      // No subdomain (e.g., example.com)
-      return null;
-    }
-    return null;
-  }
-
-  // Find matching environment based on subdomain
-  function findMatchingEnvironment(environments, subdomain) {
-    if (!subdomain || !environments || !environments.length) {
+  // Find matching environment based on regex pattern against hostname
+  function findMatchingEnvironment(environments, hostname) {
+    if (!hostname || !environments || !environments.length) {
       return null;
     }
     
-    return environments.find(env => 
-      env.subdomain && env.subdomain.toLowerCase() === subdomain.toLowerCase()
-    );
+    return environments.find(env => {
+      // Use regex if defined, otherwise fall back to subdomain as the pattern
+      const pattern = env.regex || env.subdomain;
+      if (!pattern) return false;
+      
+      try {
+        const regex = new RegExp(pattern, 'i');
+        return regex.test(hostname);
+      } catch (e) {
+        // Invalid regex - skip this environment
+        console.warn(`SwitchEnv: Invalid regex pattern "${pattern}" for environment "${env.name}"`);
+        return false;
+      }
+    });
   }
 
   // Remove existing marker if present
@@ -156,11 +153,11 @@
         return;
       }
 
-      // Get current subdomain
-      const subdomain = getSubdomain();
+      // Get current hostname for regex matching
+      const hostname = window.location.hostname;
       
-      // Find matching environment
-      const matchingEnv = findMatchingEnvironment(environments, subdomain);
+      // Find matching environment using regex
+      const matchingEnv = findMatchingEnvironment(environments, hostname);
       
       // Only show marker for known environments
       if (matchingEnv) {
